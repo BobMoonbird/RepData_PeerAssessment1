@@ -98,7 +98,7 @@ New median:10766.19
 New mean: 10766.19
 Somehow they are same, I do't know how.
 I even checked with this:
-```{r}
+```{r, echo = TRUE}
 summary(nasbd$nasums)
 ```
 
