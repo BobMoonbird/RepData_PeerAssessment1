@@ -7,19 +7,89 @@ output:
 
 
 ## Loading and preprocessing the data
-
+activity = read.csv("activity.csv")
+activity$interval = as.factor(activity$interval)
+activity$date = as.Date(activity$date)
 
 
 ## What is mean total number of steps taken per day?
-
-
+dates = unique(activity$date)
+sums = vector()
+for(i in 1:length(dates))
+{sums[i]=sum(activity$steps[which(activity$date==dates[i] &!is.na(activity$steps))])}
+sbd = data.frame(dates, sums) #total nmber of steps taken per day
+hist(sbd$sums) #histogram for the total number of steps taken each day
+mean(sbd$sums) #mean for the total number of steps taken each day
+median(sbd$sums) #median for the total number of steps taken each day
 
 ## What is the average daily activity pattern?
-
+intmeans = vector()
+for(i in 1:length(intervals))
+{intmeans[i]=mean(activity$steps[which(activity$interval==intervals[i] &!is.na(activity$steps))])}
+meanbi = data.frame(intervals, intmeans)
+plot(meanbi, type = "l", col = "green") #plot for the mean steps for each interval across all days
+meanbi[which(meanbi$intmeans==max(meanbi$intmeans)),1] #5-minute interval that on average contains most number of steps 
 
 
 ## Imputing missing values
+#3.1 Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+length(which(is.na(activity$steps)==TRUE))
 
+#3.2 NAs missing strategy (takign the decision)
+nas = activity[which(is.na(activity$steps)==TRUE),]
+table(nas$date)
 
+#3.3 filling NAs with mean for the interval, as filling it with mean fort he day is useless
+activity_na = activity
+activity_na[,4] = rep(meanbi$intmeans, 61)
+
+for(i in 1:length(activity_na$steps) )
+{
+  if (i %in% which(is.na(activity_na$steps))== TRUE) 
+  {activity_na[i,5] <- activity_na[i,4]} 
+  else
+  {activity_na[i,5] <- activity_na[i,1]}
+}
+names(activity_na)[4] = "mean.for.the.interval"
+names(activity_na)[5] = "value.after.NA.strategy"
+
+#3.4 hist, mean, median with NAs filled in
+dates = unique(activity$date)
+nasums = vector()
+for(i in 1:length(dates))
+{nasums[i]=sum(activity_na$V6[which(activity$date==dates[i])])}
+nasbd = data.frame(dates, nasums)
+hist(nasbd$nasums)
+mean(nasbd$nasums)
+median(nasbd$nasums)
+
+#showing the difference
+plot(activity_na$date, activity_na$value.after.NA.strategy, col = "red", type = "l")
+lines(activity$date, activity$steps, col = "green")
 
 ## Are there differences in activity patterns between weekdays and weekends?
+#4.1 defining weekdays and weekends
+activity_na[,6] = weekdays(as.Date(activity$date))
+days = unique(activity_na$V6)
+for(i in 1:length(activity_na$steps))
+{
+  if(activity_na$V6[i] %in% days[1:5])
+  {activity_na$V6[i] = "weekday"}
+  #if(activity_na$V6[i] %in% days[6:7])
+  else  {activity_na$V6[i]="weekend"}
+}
+
+#4.2 plotting weekends and weekdays steps
+
+weekdaymeans = vector()
+for(i in 1:length(intervals))
+{weekdaymeans[i]=mean(activity_na$value.after.NA.strategy[which(activity_na$V6=="weekday")])}
+daymeanbi = data.frame(intervals, weekdaymeans)
+
+weekendmeans = vector()
+for(i in 1:length(intervals))
+{weekendmeans[i]=mean(activity_na$value.after.NA.strategy[which(activity_na$V6=="weekend")])}
+endmeanbi = data.frame(intervals, weekendmeans)
+
+plot(endmeanbi$weekendmeans, col = "red", type = "l")
+lines(daymeanbi$weekdaymeans, col = "green")
