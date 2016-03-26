@@ -1,9 +1,3 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
 ## Loading and preprocessing the data
 
 So, to start with, we load the data and turn dates and intervals into as.date and as.factor:
@@ -39,7 +33,8 @@ the mean is 9354.23
 Talking about the daily patterns, I needed to do some job on avareging the thing across each interval.  
 Then I decided to create a data frame with names of intervals and its avareges.  
 There you can see the plot for that avarege and the calculus for max avarege interval.  
-```{r, echo=TRUE}
+```{r}
+intervals = unique(activity$interval)
 intmeans = vector()
 for(i in 1:length(intervals))
 {intmeans[i]=mean(activity$steps[which(activity$interval==intervals[i] &!is.na(activity$steps))])}
@@ -140,8 +135,10 @@ for(i in 1:length(intervals))
 {weekendmeans[i]=mean(activity_na$value.after.NA.strategy[which(activity_na$type.of.day=="weekend"&activity_na$interval==intervals[i])])}
 endmeanbi = data.frame(intervals, weekendmeans)
 
-plot(endmeanbi$weekendmeans, col = "red", type = "l")
-lines(daymeanbi$weekdaymeans, col = "green")
+par(mfrow=c(1,2))
+plot(intervals, endmeanbi$weekendmeans, col = "red", type = "l", xlab = "Intervals", ylab = "Mean number of steps on weekends")
+
+plot(intervals, daymeanbi$weekdaymeans, col = "green", type = "l", xlab = "Intervals", ylab = "Mean number of steps on weekdays")
 temp <- legend("topright", legend = c("Weekday ", "Weekend"), text.width = strwidth("1,000,000"),lty = 1, col = c("green", "red"), xjust = 1, yjust = 1, title = "Line Types")
 ```
 
