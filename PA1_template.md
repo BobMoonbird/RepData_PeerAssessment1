@@ -1,7 +1,7 @@
 ## Loading and preprocessing the data
 
 So, to start with, we load the data and turn dates and intervals into as.date and as.factor:
-```{r}
+```{r, ECHO=TRUE}
 activity = read.csv("activity.csv") #read the file
 activity$interval = as.factor(activity$interval) #intervals should be factors for futhers tasks
 activity$date = as.Date(activity$date) #dates should be seen as dates for further tasks#
