@@ -24,13 +24,13 @@ sbd = data.frame(dates, sums) #total nmber of steps taken per day
 hist(sbd$sums, breaks = 100, main = "Total number of steps for all days", xlab = "Number of steps per day") #histogram for the total number of steps taken each day
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+<img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
 ```r
 plot(sbd$dates, sbd$sums, type = "p", xlab = "Dates", ylab = "Number of steps on this day", main = "Number of steps for each day") #showing how total number of steps distributes across all dates
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-2.png)
+<img src="figure/unnamed-chunk-2-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
 ```r
 mean(sbd$sums) #mean for the total number of steps taken each day
