@@ -11,7 +11,7 @@ activity$date = as.Date(activity$date) #dates should be seen as dates for furthe
 ## What is mean total number of steps taken per day?
 Next find out total number of steps for ech day, the mean and the median for all days.  
 I was supposed to make a histogram for total number of steps, but I also made a plot for number of steps for each day.
-```{r, results="asis", include=TRUE, fig.align='center'}
+```{r, results="asis", include=TRUE, fig.align='center', fig.path="./figures"}
 dates = unique(activity$date)
 sums = vector()
 for(i in 1:length(dates))
