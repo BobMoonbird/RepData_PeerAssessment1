@@ -62,16 +62,14 @@ meanbi = data.frame(intervals, intmeans)
 plot(meanbi, type = "l", col = "green", main = "Avarege steps on each interval acoss all days", xlab = "Intervals", ylab = "Number of steps") #plot for the mean steps for each interval across all days
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+<img src="./figuresunnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
 
 ```r
 meanbi[which(meanbi$intmeans==max(meanbi$intmeans)),1] #5-minute interval that on average contains most number of steps 
 ```
 
-```
-## [1] 835
-## 288 Levels: 0 5 10 15 20 25 30 35 40 45 50 55 100 105 110 115 120 ... 2355
-```
+[1] 835
+288 Levels: 0 5 10 15 20 25 30 35 40 45 50 55 100 105 110 115 120 ... 2355
 
 ## Imputing missing values
 ### 3.1 Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
@@ -133,23 +131,19 @@ nasbd = data.frame(dates, nasums)
 hist(nasbd$nasums, breaks = 100, main = "Total number of steps for all days", xlab = "Number of steps per day")
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+<img src="./figuresunnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
 
 ```r
 mean(nasbd$nasums)
 ```
 
-```
-## [1] 10766.19
-```
+[1] 10766.19
 
 ```r
 median(nasbd$nasums)
 ```
 
-```
-## [1] 10766.19
-```
+[1] 10766.19
 New median:10766.19  
 New mean: 10766.19  
 Somehow they are same, I do't know how.  
@@ -172,7 +166,7 @@ lines(activity$date, activity$steps, col = "green")
 temp <- legend("topleft", legend = c("With missing values", "Filled in missing values"), text.width = strwidth("2,000,000"),lty = 1, col = c("green", "red"), xjust = 1, yjust = 1, title = " ")
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png)
+<img src="./figuresunnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
 The red lines here are the days with missed values, filled with mean interval each.   
 Could have filled with just avarege date figures, but then it would not be possible to see deeper than just a day.  
 
@@ -214,7 +208,7 @@ plot(intervals, daymeanbi$weekdaymeans, col = "green", type = "l", xlab = "Inter
 temp <- legend("topright", legend = c("Weekday ", "Weekend"), text.width = strwidth("1,000,000"),lty = 1, col = c("green", "red"), xjust = 1, yjust = 1, title = "Line Types")
 ```
 
-![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png)
+<img src="./figuresunnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />
 
 It can be seen from the graph, that weekend activity (the red line) starts later and ends later than weekday (the green line), and is more intense in the day time.  
 Overall, the sums of steps for the avarege weekend and weekday are here:  

@@ -33,7 +33,7 @@ the mean is 9354.23
 Talking about the daily patterns, I needed to do some job on avareging the thing across each interval.  
 Then I decided to create a data frame with names of intervals and its avareges.  
 There you can see the plot for that avarege and the calculus for max avarege interval.  
-```{r}
+```{r, results="asis", include=TRUE, fig.align='center', fig.path="./figures"}
 intervals = unique(activity$interval)
 intmeans = vector()
 for(i in 1:length(intervals))
@@ -78,7 +78,7 @@ names(activity_na)[5] = "value.after.NA.strategy"
 
 ### 3.4 hist, mean, median with NAs filled in
 Calculating all same thing for the new data set, with missing values being filled in  
-```{r}
+```{r, results="asis", include=TRUE, fig.align='center', fig.path="./figures"}
 dates = unique(activity$date)
 nasums = vector()
 for(i in 1:length(dates))
@@ -97,7 +97,7 @@ summary(nasbd$nasums)
 ```
 
 I also decided to show how exactly filled NAs changed the picture:  
-```{r}
+```{r, results="asis", include=TRUE, fig.align='center', fig.path="./figures"}
 plot(activity_na$date, activity_na$value.after.NA.strategy, col = "red", type = "l", main = "Total number of steps for each day with filled missing values", xlab = "Dates", ylab = "Number of steps on this date")
 lines(activity$date, activity$steps, col = "green")
 temp <- legend("topleft", legend = c("With missing values", "Filled in missing values"), text.width = strwidth("2,000,000"),lty = 1, col = c("green", "red"), xjust = 1, yjust = 1, title = " ")
@@ -124,7 +124,7 @@ names(activity_na)[6]="type.of.day"
 
 ### 4.2 plotting weekends and weekdays steps
 Now create two new data frames, one for weekend one for weekday avarege for each interval.
-```{r}
+```{r, results="asis", include=TRUE, fig.align='center', fig.path="./figures"}
 weekdaymeans = vector()
 for(i in 1:length(intervals))
 {weekdaymeans[i]=mean(activity_na$value.after.NA.strategy[which(activity_na$type.of.day=="weekday"&activity_na$interval==intervals[i])])}
